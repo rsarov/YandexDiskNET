@@ -2,7 +2,7 @@
 Simple client for use Yandex Disk
 
 usage example
-
+First clone this https://github.com/rsarov/YandexDiskClient.git
 ```c#
 using System;
 using YandexDiskRestClient;
