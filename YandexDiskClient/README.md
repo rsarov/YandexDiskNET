@@ -3,7 +3,7 @@ Simple client for use Yandex Disk
 
 usage example
 
-```
+```c#
 using System;
 using YandexDiskRestClient;
 
