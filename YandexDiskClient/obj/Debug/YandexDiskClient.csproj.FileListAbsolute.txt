@@ -1,0 +1,11 @@
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\YandexDiskClient.dll.config
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\YandexDiskClient.XML
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\YandexDiskClient.dll
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\YandexDiskClient.pdb
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\obj\Debug\YandexDiskClient.csprojResolveAssemblyReference.cache
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\obj\Debug\YandexDiskClient.dll
+C:\Users\sarov\source\repos\YandexDiskClient\YandexDiskClient\obj\Debug\YandexDiskClient.pdb
