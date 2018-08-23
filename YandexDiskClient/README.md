@@ -1,7 +1,7 @@
 # YandexDiskClient
 Simple client for use Yandex Disk
 
-usage 
+usage example
 
 using System;
 using YandexDiskRestClient;
