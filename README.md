@@ -1,7 +1,7 @@
 # YandexDiskClient
 Simple client for use Yandex Disk
 
-First clone this repo http://github.com/rsarov/YandexDiskClient.git
+First clone this repo https://github.com/rsarov/YandexDiskClient.git
 
 Build project
 
