@@ -1,8 +1,9 @@
 # YandexDiskClient
 Simple client for use Yandex Disk
 
+First clone this repo github.com/rsarov/YandexDiskClient.git
+
 usage example
-First clone this https://github.com/rsarov/YandexDiskClient.git
 ```c#
 using System;
 using YandexDiskRestClient;
