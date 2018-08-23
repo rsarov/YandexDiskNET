@@ -1,13 +1,13 @@
 # YandexDiskClient
 Simple client for use Yandex Disk
 
-usage example for Visual Studio 2015
-
 First clone this repo http://github.com/rsarov/YandexDiskClient.git
+
+Build project
 
 Add reference to YandexDiskClient.dll
 
-
+usage example for Visual Studio 2015
 ```c#
 using System;
 using YandexDiskRestClient;
