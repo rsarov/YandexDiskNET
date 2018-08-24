@@ -1,7 +1,13 @@
 # YandexDiskNET
 Simple client for use Yandex Disk in .NET
 
-First clone this repo https://github.com/rsarov/YandexDiskNET.git
+Setup
+
+Run "Install-Package YandexDiskNET" in Package Manager Console Visual Studio
+
+or 
+
+Clone this repo https://github.com/rsarov/YandexDiskNET.git
 
 Build project
 
