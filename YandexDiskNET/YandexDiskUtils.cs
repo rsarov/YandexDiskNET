@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Handlers;
 using System.Threading.Tasks;
@@ -35,25 +36,25 @@ namespace YandexDiskNET
                 HttpResponseMessage response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);              
 
                 using (Stream stream = await response.Content.ReadAsStreamAsync())
-                {                    
-                    byte[] buffer = new byte[4096];
+                {                   
+                    byte[] buf = new byte[4096];
                     bool isMoreToRead = true;
 
                     do
                     {
-                        int read = await stream.ReadAsync(buffer, 0, buffer.Length);
-
-                        if (read == 0)
+                        int read = await stream.ReadAsync(buf, 0, buf.Length);
+                        if (read != 0)
                         {
-                            isMoreToRead = false;
+                            byte[] write = new byte[read];
+                            buf.ToList().CopyTo(0, write, 0, read);
+                            using (FileStream file = new FileStream(destFileName, FileMode.Append, FileAccess.Write))
+                            {
+                                file.Write(write, 0, read);
+                            }                            
                         }
                         else
                         {
-                            using (FileStream file = new FileStream(destFileName, FileMode.Append, FileAccess.Write))
-                            {
-                                file.Write(buffer, 0, buffer.Length);
-                            }
-                            
+                            isMoreToRead = false;
                         }
                     } while (isMoreToRead);
                 }
