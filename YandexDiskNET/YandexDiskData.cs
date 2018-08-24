@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 //This united representation answers Yandex Disk
 
-namespace YandexDiskRestClient
+namespace YandexDiskNET
 {
 
     #region Structures for response

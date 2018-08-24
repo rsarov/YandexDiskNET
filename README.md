@@ -10,7 +10,7 @@ Add reference to YandexDiskNET.dll
 usage example for Visual Studio 2015
 ```c#
 using System;
-using YandexDiskRestClient;
+using YandexDiskNET;
 
 namespace ConsoleAppYandexDiskTest
 {

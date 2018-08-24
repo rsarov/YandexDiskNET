@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Handlers;
 using System.Threading.Tasks;
 
-namespace YandexDiskRestClient
+namespace YandexDiskNET
 {
     /// <summary>
     /// Utils for YandexDiskNET

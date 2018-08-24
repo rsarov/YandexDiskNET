@@ -5,7 +5,7 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 
-namespace YandexDiskRestClient
+namespace YandexDiskNET
 {
     /// <summary>
     /// Implementation REST API Yandex Disk for .Net
