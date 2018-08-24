@@ -17,7 +17,7 @@ namespace YandexDiskRestClient
         /// <param name="url">URL for download</param>
         /// <param name="destFileName">Destination file name</param>
         /// <param name="progress">Function for display progress download</param>
-        /// <returns></returns>
+        /// <returns>Destination file nanme or null if failure</returns>
         internal static async Task<string> DownloadFileAsync(string url, string destFileName, IProgress<double> progress = null)
         {
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
@@ -73,7 +73,7 @@ namespace YandexDiskRestClient
         /// <param name="url">URL for upload</param>
         /// <param name="sourceFileName">Target file name for upload</param>
         /// <param name="progress">Function for display progress upload</param>
-        /// <returns></returns>
+        /// <returns>True if upload complete successful</returns>
         internal static async Task<bool> UploadFileAsync(string url, string sourceFileName, IProgress<double> progress = null)
         {
             bool success = false;                 
