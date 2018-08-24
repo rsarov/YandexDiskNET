@@ -1,11 +1,11 @@
-# YandexDiskClient .NET
+# YandexDiskNET
 Simple client for use Yandex Disk in .NET
 
 First clone this repo https://github.com/rsarov/YandexDiskClient.git
 
 Build project
 
-Add reference to YandexDiskClient.dll
+Add reference to YandexDiskNET.dll
 
 usage example for Visual Studio 2015
 ```c#

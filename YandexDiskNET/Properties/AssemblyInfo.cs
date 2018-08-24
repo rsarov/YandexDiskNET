@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("YandexDiskClient")]
+[assembly: AssemblyTitle("YandexDiskNET")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("YandexDiskClient")]
+[assembly: AssemblyProduct("YandexDiskNET")]
 [assembly: AssemblyCopyright("Copyright © RStar 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
