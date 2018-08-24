@@ -1,7 +1,7 @@
 # YandexDiskNET
 Simple client for use Yandex Disk in .NET
 
-First clone this repo https://github.com/rsarov/YandexDiskClient.git
+First clone this repo https://github.com/rsarov/YandexDiskNET.git
 
 Build project
 
