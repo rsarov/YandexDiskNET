@@ -36,4 +36,4 @@ namespace ConsoleAppYandexDiskTest
     }
 }
 ```
-More sample https://github.com/rsarov/YandexDiskNET/wiki
+More samples https://github.com/rsarov/YandexDiskNET/wiki
