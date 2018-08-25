@@ -778,6 +778,7 @@ namespace YandexDiskNET
         /// <returns>The return value of the ErrorResponse structure with null values if successful, else error message</returns>
         public ErrorResponse DownloadResource(string sourceFileName, string destFileName)
         {
+            bool success = false;
             string url;
             string content;            
             Param param = new Param();
@@ -790,11 +791,11 @@ namespace YandexDiskNET
             {
                 JObject json = JObject.Parse(content);
                 url = (string)json.SelectToken("href");
-                destFileName = YandexDiskUtils.DownloadFileAsync(url, destFileName).Result;                   
+                success = YandexDiskUtils.DownloadFile(url, destFileName);                   
                 errorResponse = errorResponse.GetError(content);
             }
 
-            if (destFileName == null)
+            if (!success && errorResponse.Error == null)
             {
                 errorResponse.Description = "Connection error.";
                 errorResponse.Error = "Http request exception.";                
@@ -814,6 +815,7 @@ namespace YandexDiskNET
         /// <returns>The return value of the ErrorResponse structure with null values if successful, else error message</returns>
         public async Task<ErrorResponse> DownloadResourceAcync(string sourceFileName, string destFileName, IProgress<double> progress = null)
         {
+            bool success = false;
             string url;
             string content;
             Param param = new Param();
@@ -826,11 +828,11 @@ namespace YandexDiskNET
             {
                 JObject json = JObject.Parse(content);
                 url = (string)json.SelectToken("href");
-                destFileName = await YandexDiskUtils.DownloadFileAsync(url, destFileName, progress);
+                success = await YandexDiskUtils.DownloadFileAsync(url, destFileName, progress);
                 errorResponse = errorResponse.GetError(content);
             }
 
-            if (destFileName == null)
+            if (!success && errorResponse.Error == null)
             {
                 errorResponse.Description = "Connection error.";
                 errorResponse.Error = "Http request exception.";
@@ -865,7 +867,7 @@ namespace YandexDiskNET
             {              
                 JObject json = JObject.Parse(content);
                 url = (string)json.SelectToken("href");
-                success = YandexDiskUtils.UploadFileAsync(url, sourceFileName).Result;
+                success = YandexDiskUtils.UploadFile(url, sourceFileName);
                 errorResponse = errorResponse.GetError(content);
             }
 

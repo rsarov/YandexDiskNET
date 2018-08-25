@@ -12,15 +12,52 @@ namespace YandexDiskNET
     /// </summary>
     internal class YandexDiskUtils
     {
+
+        /// <summary>
+        /// Download file from target url
+        /// </summary>
+        /// <param name="url">URL for download</param>
+        /// <param name="destFileName">Destination file name</param>        
+        /// <returns>True if download complete successful</returns>
+        internal static bool DownloadFile(string url, string destFileName)
+        {
+            bool success = false;            
+            HttpClient client = HttpClientFactory.Create();
+
+            try
+            {                             
+                HttpResponseMessage response = client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead).Result;
+                if(response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+                    {
+                        using (FileStream file = new FileStream(destFileName, FileMode.Create, FileAccess.Write))
+                        {
+                            stream.CopyTo(file);
+                            success = true;
+                        }
+                    }
+                }                        
+            }
+            catch (Exception)
+            {
+                return success;
+            }
+
+            return success;
+        }
+
+
         /// <summary>
         /// Download file from target url
         /// </summary>
         /// <param name="url">URL for download</param>
         /// <param name="destFileName">Destination file name</param>
         /// <param name="progress">Function for display progress download</param>
-        /// <returns>Destination file nanme or null if failure</returns>
-        internal static async Task<string> DownloadFileAsync(string url, string destFileName, IProgress<double> progress = null)
+        /// <returns>True if download complete successful</returns>
+        internal static async Task<bool> DownloadFileAsync(string url, string destFileName, IProgress<double> progress = null)
         {
+            bool success = false;
             ProgressMessageHandler progressHandler = new ProgressMessageHandler();
             HttpClient client = HttpClientFactory.Create(progressHandler);
 
@@ -58,13 +95,43 @@ namespace YandexDiskNET
                         }
                     } while (isMoreToRead);
                 }
+                success = true;
             }
             catch (Exception)
             {
-                destFileName = null;
+                return success;
             }
 
-            return destFileName;
+            return success;
+        }
+
+
+        /// <summary>
+        /// Upload file from target path
+        /// </summary>
+        /// <param name="url">URL for upload</param>
+        /// <param name="sourceFileName">Target file name for upload</param>        
+        /// <returns>True if upload complete successful</returns>
+        internal static bool UploadFile(string url, string sourceFileName)
+        {
+            bool success = false;            
+            HttpClient client = HttpClientFactory.Create();
+
+            try
+            {
+                using (StreamContent streamContent = new StreamContent(new FileStream(sourceFileName, FileMode.Open, FileAccess.Read)))
+                {                    
+                    HttpResponseMessage response = client.PutAsync(url, streamContent).Result;
+                    if (response.StatusCode == System.Net.HttpStatusCode.Created)
+                        success = true;
+                }
+            }
+            catch (Exception)
+            {
+                return success;
+            }
+
+            return success;
         }
 
 
@@ -93,7 +160,7 @@ namespace YandexDiskNET
             }
             catch (Exception)
             {
-                
+                return success;
             }          
           
             return success;
