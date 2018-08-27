@@ -9,7 +9,7 @@ Supported Platforms:
 
 Setup
 
-- Run "Install-Package YandexDiskNET" in Package Manager Console Visual Studio
+Run "Install-Package YandexDiskNET" in Package Manager Console Visual Studio
 
 or 
 
