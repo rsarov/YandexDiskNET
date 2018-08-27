@@ -1,6 +1,12 @@
 # YandexDiskNET
 Simple client for use Yandex Disk in .NET
 
+Supported Platforms:
+
+	- .NET Framework 4.5+
+	
+	- .NET Standard 1.3 and .NET Standard 2.0; providing .NET Core support.	
+
 Setup
 
 Run "Install-Package YandexDiskNET" in Package Manager Console Visual Studio
