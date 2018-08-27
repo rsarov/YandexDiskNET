@@ -49,7 +49,7 @@ namespace YandexDiskNET
 
 
         /// <summary>
-        /// Download file from target url
+        /// Download file from target url asynchronous
         /// </summary>
         /// <param name="url">URL for download</param>
         /// <param name="destFileName">Destination file name</param>
@@ -136,7 +136,7 @@ namespace YandexDiskNET
 
 
         /// <summary>
-        /// Upload file from target path
+        /// Upload file from target path asynchronous
         /// </summary>
         /// <param name="url">URL for upload</param>
         /// <param name="sourceFileName">Target file name for upload</param>
