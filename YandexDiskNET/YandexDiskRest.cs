@@ -223,6 +223,7 @@ namespace YandexDiskNET
                     url = "https://cloud-api.yandex.net/v1/disk?" + urlBuilder.Fields;
                     break;
                 case YandexDiskAsk.Get_meta_information_about_file_or_folder:
+                    if (urlBuilder.Path == null) urlBuilder.Path = "path=/";
                     url = "https://cloud-api.yandex.net/v1/disk/resources?" + urlBuilder.Path + urlBuilder.Fields + urlBuilder.Limit +
                         urlBuilder.Offset + urlBuilder.Preview_crop + urlBuilder.Preview_size + urlBuilder.Sort;
                     break;
@@ -350,7 +351,7 @@ namespace YandexDiskNET
         /// <param name="preview_crop">Allow trimming the preview.</param>
         /// <param name="preview_size">The size of the preview. Example "120x240"</param>
         /// <returns>The return value of the ResInfo structure</returns>
-        public ResInfo GetResInfo(int? limit = null, string path = "", SortField? sort = null, ResFields[] fields = null,
+        public ResInfo GetResInfo(int? limit = null, string path = null, SortField? sort = null, ResFields[] fields = null,
             int? offset = null, bool? preview_crop = null, string preview_size = null)
         {
             string content;
@@ -554,12 +555,12 @@ namespace YandexDiskNET
             ErrorResponse errorResponse = new ErrorResponse();            
 
             param.Path = path;
-            param.Force_async = true;
+            param.Force_async = false;
             param.Permanently = !recycle;
 
             content = CommandDisk(Oauth, YandexDiskAsk.Remove_file_or_folder, param);
 
-            if (content != null)
+            if (!string.IsNullOrEmpty(content))
             {
                 AwaitAsyncComplete(content);
                 errorResponse = errorResponse.GetError(content);
@@ -573,17 +574,17 @@ namespace YandexDiskNET
         /// Create a copy of a file or folder
         /// </summary>
         /// <param name="from">The path to the resource being copied. The path in the parameter value should be encoded in the URL format. Example 'old/test.txt'</param>
-        /// <param name="path">The path to the resource being created. The path in the parameter value should be encoded in the URL format. Example 'old/new'</param>
+        /// <param name="dest">The path to the resource being created. The path in the parameter value should be encoded in the URL format. Example 'old/new'</param>
         /// <param name="overwrite">Overwrite an existing resource.</param>
         /// <returns>The return value of the ErrorResponse structure with null values if successful, else error message</returns>
-        public ErrorResponse CopyResource(string from, string path, bool overwrite = false)
+        public ErrorResponse CopyResource(string from, string dest, bool overwrite = false)
         {            
             string content;
             Param param = new Param();
             ErrorResponse errorResponse = new ErrorResponse();            
 
             param.From = from;
-            param.Path = path;
+            param.Path = dest;
             param.Overwrite = overwrite;
             param.Force_async = true;
 
@@ -603,17 +604,17 @@ namespace YandexDiskNET
         /// Move file or folder
         /// </summary>
         /// <param name="from">The path to the roaming resource. The path in the parameter value should be encoded in the URL format. Example 'old/test.txt'</param>
-        /// <param name="path">The path to the resource being created. The path in the parameter value should be encoded in the URL format. Example 'old/new'</param>
+        /// <param name="dest">The path to the resource being created. The path in the parameter value should be encoded in the URL format. Example 'old/new'</param>
         /// <param name="overwrite">Overwrite an existing resource.</param>
         /// <returns>The return value of the ErrorResponse structure with null values if successful, else error message</returns>
-        public ErrorResponse MoveResource(string from, string path, bool overwrite = false)
+        public ErrorResponse MoveResource(string from, string dest, bool overwrite = false)
         {           
             string content;
             Param param = new Param();
             ErrorResponse errorResponse = new ErrorResponse();            
 
             param.From = from;
-            param.Path = path;
+            param.Path = dest;
             param.Overwrite = overwrite;
             param.Force_async = true;
 

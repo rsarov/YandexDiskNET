@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 //This united representation answers Yandex Disk
@@ -364,9 +365,9 @@ namespace YandexDiskNET
 
 
         /// <summary>
-        /// Type resource
+        /// Type resource file or folder
         /// </summary>
-        public string Type { get; set; }
+        public TypeRes Type { get; set; }
 
 
         /// <summary>
@@ -394,7 +395,8 @@ namespace YandexDiskNET
         /// <param name="onlyFiles">Request only for files</param>
         /// <returns></returns>
         public static ResInfo GetResInfo(string content, bool onlyFiles = false)
-        {
+        {                      
+            string node;
             ResInfo resInfo = new ResInfo();
             ResInfoList resInfoList = new ResInfoList();
             List<ResInfo> items = new List<ResInfo>();
@@ -405,7 +407,7 @@ namespace YandexDiskNET
             Exif exif;
             Custom_properties custom_properties;
             ShareInfo shareInfo;
-            CommentIds commentIds;
+            CommentIds commentIds;            
 
             if (content != null)
             {
@@ -439,7 +441,18 @@ namespace YandexDiskNET
                 resInfo.Media_type = (string)json.SelectToken("media_type");
                 resInfo.Path = (string)json.SelectToken("path");
                 resInfo.Preview = (string)json.SelectToken("preview");
-                resInfo.Type = (string)json.SelectToken("type");
+                node = (string)json.SelectToken("type");
+                if(node != null)
+                {                   
+                    foreach (var s in Enum.GetNames(typeof(TypeRes)))
+                    {
+                        if(string.Equals(node, s, StringComparison.OrdinalIgnoreCase))
+                        {
+                            resInfo.Type = (TypeRes)Enum.Parse(typeof(TypeRes), s, true);
+                            break;
+                        }
+                    }
+                }               
                 resInfo.Mime_type = (string)json.SelectToken("mime_type");
                 resInfo.Revision = (long?)json.SelectToken("revision");
 
@@ -484,23 +497,32 @@ namespace YandexDiskNET
                         item.Media_type = (string)token.SelectToken("media_type");
                         item.Path = (string)token.SelectToken("path");
                         item.Preview = (string)token.SelectToken("preview");
-                        item.Type = (string)token.SelectToken("type");
+                        node = (string)token.SelectToken("type");
+                        if (node != null)
+                        {
+                            foreach (var s in Enum.GetNames(typeof(TypeRes)))
+                            {
+                                if (string.Equals(node, s, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    item.Type = (TypeRes)Enum.Parse(typeof(TypeRes), s, true);
+                                    break;
+                                }
+                            }
+                        }                        
                         item.Mime_type = (string)token.SelectToken("mime_type");
                         item.Revision = (long?)token.SelectToken("revision");
 
                         items.Add(item);
                     }
 
-                    resInfoList.Sort = (string)json.SelectToken("_embedded.sort");
-                    resInfoList.Items = items;
+                    resInfoList.Sort = (string)json.SelectToken("_embedded.sort");                    
                     resInfoList.Limit = (int?)json.SelectToken("_embedded.limit");
                     resInfoList.Offset = (int?)json.SelectToken("_embedded.offset");
                     resInfoList.Path = (string)json.SelectToken("_embedded.path");
-                    resInfoList.Total = (int?)json.SelectToken("_embedded.total");
-
-                    resInfo._Embedded = resInfoList;
+                    resInfoList.Total = (int?)json.SelectToken("_embedded.total");                    
                 }
-
+                resInfoList.Items = items;
+                resInfo._Embedded = resInfoList;
                 resInfo.ErrorResponse = errorResponse.GetError(content);
             }
             return resInfo;
@@ -1183,7 +1205,7 @@ namespace YandexDiskNET
 
 
     /// <summary>
-    /// Resource type
+    /// Resource type file or folder
     /// </summary>
     public enum TypeRes
     {
