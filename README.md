@@ -30,14 +30,25 @@ namespace ConsoleAppYandexDiskTest
     {
         static void Main(string[] args)
         {
-	    const string clientId = "";
+	     
+            const string clientId = "";
             const string clientSecret = "";
             const string callbackUri = "Require://token";
-            string pathCredentials = @"E:\Downloads\credit";
-            YandexDiskOAuth.GetConfirmationCode(clientId, clientSecret, callbackUri, pathCredentials, 20).Wait();
-            var token = YandexDiskOAuth.GetAccessToken(pathCredentials);
-            YandexDiskRest disk = new YandexDiskRest(token);
-            var info = disk.GetDiskInfo();           
+            string pathCredentials = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".credit");
+
+            string token = YandexDiskOAuth.GetAccessToken(pathCredentials);
+            if(token == null)
+            {
+                YandexDiskOAuth.GetConfirmationCode(clientId, clientSecret, callbackUri, pathCredentials, 20).Wait();
+                token = YandexDiskOAuth.GetAccessToken(pathCredentials);
+            }
+
+            if(token != null)
+            {
+                YandexDiskRest disk = new YandexDiskRest(token);
+                var info = disk.GetDiskInfo();
+            } 
+            
             Console.Read();
         }
     }
